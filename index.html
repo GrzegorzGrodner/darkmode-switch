@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dark/light mode</title>
+    <style>
+        :root{
+            --light-mode-bg: #fefefe;
+            --light-mode-text: #010101;
+            --dark-mode-bg: #010101;
+            --dark-mode-text: #fefefe;
+            --neutral: #a9a9a9;
+        }
+        *{
+            transition: 1s;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: var(--dark-mode-bg);
+            color: var(--dark-mode-text);
+        }
+        img{
+            max-width: 100%;
+            filter: invert(100%);
+        }
+
+        .dl-switch{
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            aspect-ratio: 1/1;
+            width: 2rem;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .dl-switch:hover{
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dl-switch" onclick="toggleMode()">◐</div>
+
+    <script>
+        // zmienna
+        let isLightMode = false;
+
+        // zmiana na lightmode
+        function lightmode(){
+            document.body.style.backgroundColor = "var(--light-mode-bg)";
+            document.body.style.color = "var(--light-mode-text)";
+            document.querySelectorAll("img").forEach(function(img){
+                img.style.filter = "invert(0)";
+            });
+        }
+
+        // zmiana na darkmode
+        function darkmode(){
+            document.body.style.backgroundColor = "var(--dark-mode-bg)";
+            document.body.style.color = "var(--dark-mode-text)";
+            document.querySelectorAll("img").forEach(function(img){
+                img.style.filter = "invert(100%)";
+            });
+        }
+
+        // funkcja przełączania - pierwsze kliknięcie włącza lightmode, drugie wraca do darkmode, kolejne znowu light itd.
+        function toggleMode(){
+            if(isLightMode){
+                darkmode();
+                isLightMode = false;
+            } else {
+                lightmode();
+                isLightMode = true;
+            }
+        }
+    </script>
+    <h1>Zmiana dark/light mode</h1>
+
+    <img src="https://images.squarespace-cdn.com/content/v1/5013f4b2c4aaa4752ac69b17/b6cbb5a0-dd4d-48f3-8e83-72d67dd73ab8/black+and+white+photography+for+beginners">
+
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem laboriosam, odio voluptate incidunt pariatur illum! Quia alias provident unde velit aspernatur omnis repellat magnam iste ducimus aperiam quod blanditiis, nesciunt fuga eum aliquid nulla, ullam debitis? Minus, commodi accusamus? Dicta tenetur distinctio reiciendis praesentium quo!</p>
+    
+</body>
+</html>
